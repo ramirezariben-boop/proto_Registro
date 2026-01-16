@@ -1,0 +1,67 @@
+const COLORS = [
+  "#ff3b3b", "#ff6a00", "#ff9f1c", "#ffd60a", "#c7f000",
+  "#7ae582", "#2ec4b6", "#00b4d8", "#0096c7", "#0077b6",
+  "#5a4fcf", "#7b5cff", "#9d4edd", "#c77dff", "#e0aaff",
+  "#ff5d8f", "#ff87ab", "#ffb3c6", "#ffd6e0", "#ffe5ec",
+  "#adb5bd", "#868e96", "#495057", "#343a40", "#212529",
+];
+
+const buttons = [
+  { name: "Registro tiempo", href: "https://reg-rec.vercel.app", external: true },
+  { name: "Registro libre", href: "/registro-libre" },
+  { name: "Tarot", href: "/tarot-reg" },
+  { name: "Ideas", href: "/ideas-reg" },
+  { name: "Mejoras", href: "/mejoras-reg" },
+  { name: "Calculadora", href: "/calculadora-c" },
+  { name: "Memorias", href: "/memory-reg" },
+  { name: "Sueños", href: "/suenos-reg" },
+  ...Array.from({ length: 17 }).map((_, i) => ({
+    name: `Proyecto ${i + 9}`,
+    href: null as string | null,
+    external: false,
+  })),
+];
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-neutral-950 p-10">
+      <h1 className="text-xl mb-8 text-white/80">Panel personal</h1>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+        {buttons.map((b, i) => {
+          const color = COLORS[i % COLORS.length];
+          const disabled = !b.href;
+
+          return (
+            <a
+              key={i}
+              href={disabled ? undefined : b.href!}
+              target={b.external ? "_blank" : undefined}
+              rel={b.external ? "noopener noreferrer" : undefined}
+              className={[
+                "glow-card relative rounded-xl bg-neutral-900 p-6 text-center border",
+                "transition-all duration-300 hover:scale-[1.03]",
+                disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : "",
+              ].join(" ")}
+              style={
+                {
+                  borderColor: color,
+                  // variable que usa el glow animado (en CSS)
+                  ["--glow" as any]: `${color}88`,
+                } as React.CSSProperties
+              }
+            >
+              {/* brillo extra al hover */}
+              <div
+                className="absolute inset-0 rounded-xl opacity-0 hover:opacity-100 transition"
+                style={{ boxShadow: `0 0 28px ${color}aa` }}
+              />
+
+              <div className="relative z-10 text-sm text-white/80">{b.name}</div>
+            </a>
+          );
+        })}
+      </div>
+    </main>
+  );
+}
