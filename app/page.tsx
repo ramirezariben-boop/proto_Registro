@@ -7,20 +7,53 @@ const COLORS = [
 ];
 
 const buttons = [
-  { name: "Registro tiempo", href: "https://reg-rec.vercel.app", external: true },
-  { name: "Registro libre", href: "/registro-libre" },
-  { name: "Tarot", href: "/tarot-reg" },
-  { name: "Ideas", href: "/ideas-reg" },
-  { name: "Mejoras", href: "/mejoras-reg" },
-  { name: "Calculadora", href: "/calculadora-c" },
-  { name: "Memorias", href: "/memory-reg" },
-  { name: "Sueños", href: "/suenos-reg" },
+  {
+    name: "Registro tiempo",
+    href: "https://reg-rec.vercel.app",
+    external: true,
+  },
+  {
+    name: "Registro libre",
+    href: "/registro-libre",
+    external: false,
+  },
+  {
+    name: "Tarot",
+    href: "/tarot-reg",
+    external: false,
+  },
+  {
+    name: "Ideas",
+    href: "/ideas-reg",
+    external: false,
+  },
+  {
+    name: "Mejoras",
+    href: "/mejoras-reg",
+    external: false,
+  },
+  {
+    name: "Calculadora",
+    href: "/calculadora-c",
+    external: false,
+  },
+  {
+    name: "Memorias",
+    href: "/memory-reg",
+    external: false,
+  },
+  {
+    name: "Sueños",
+    href: "/suenos-reg",
+    external: false,
+  },
   ...Array.from({ length: 17 }).map((_, i) => ({
     name: `Proyecto ${i + 9}`,
-    href: null as string | null,
+    href: null,
     external: false,
   })),
 ];
+
 
 export default function Home() {
   return (
