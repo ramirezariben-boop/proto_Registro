@@ -24,9 +24,10 @@ const TYPES = [
 
 export default function Timeline() {
   const [rows, setRows] = useState<Entry[]>([]);
-  const [activeTypes, setActiveTypes] = useState<Set<string>>(
-    new Set(TYPES.map(t => t.key))
-  );
+  const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set());
+  const [fromDate, setFromDate] = useState<string | null>(null);
+  const [toDate, setToDate] = useState<string | null>(null);
+}
 
   useEffect(() => {
     fetch("/api/read-log?type=all")
@@ -43,11 +44,75 @@ export default function Timeline() {
     });
   }
 
-  const filteredRows = rows.filter(r => activeTypes.has(r.type));
+const filteredRows = rows
+  .filter(r => activeTypes.has(r.type))
+  .filter(r => {
+    if (fromDate && r.date < fromDate) return false;
+    if (toDate && r.date > toDate) return false;
+    return true;
+  })
+  .sort((a, b) =>
+  `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`)
+);
+
+
+const metrics = TYPES.map(t => ({
+  type: t.key,
+  label: t.label,
+  count: rows.filter(r => r.type === t.key).length,
+}));
+
 
   return (
     <main className="p-8 bg-neutral-950 text-white">
       <h1 className="text-xl mb-4">Registro unificado</h1>
+
+<div className="flex flex-wrap gap-2 mb-4">
+  <button
+    onClick={() => setActiveTypes(new Set(TYPES.map(t => t.key)))}
+    className="text-xs px-3 py-1 rounded border border-neutral-700 text-white/60 hover:text-white"
+  >
+    Activar todos
+  </button>
+
+  <button
+    onClick={() => setActiveTypes(new Set())}
+    className="text-xs px-3 py-1 rounded border border-neutral-700 text-white/60 hover:text-white"
+  >
+    Limpiar
+  </button>
+</div>
+
+
+<div className="flex flex-wrap gap-3 mb-6">
+  <input
+    type="date"
+    onChange={e => setFromDate(e.target.value || null)}
+    className="bg-neutral-900 border border-neutral-700 rounded px-3 py-1 text-xs"
+  />
+
+  <input
+    type="date"
+    onChange={e => setToDate(e.target.value || null)}
+    className="bg-neutral-900 border border-neutral-700 rounded px-3 py-1 text-xs"
+  />
+</div>
+
+
+<div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+  {metrics.map(m => (
+    <div
+      key={m.type}
+      className="bg-neutral-900 rounded p-3 text-xs"
+    >
+      <div className="text-white/50">{m.label}</div>
+      <div className="text-lg text-cyan-400">{m.count}</div>
+    </div>
+  ))}
+</div>
+
+
+
 
       {/* filtros */}
       <div className="flex flex-wrap gap-2 mb-6">
@@ -70,11 +135,17 @@ export default function Timeline() {
         })}
       </div>
 
-      {filteredRows.length === 0 && (
-        <p className="text-white/40 mb-4">
-          No hay registros para los filtros seleccionados.
-        </p>
-      )}
+{rows.length === 0 && (
+  <p className="text-white/40 mb-4">
+    Cargando registros…
+  </p>
+)}
+
+{rows.length > 0 && filteredRows.length === 0 && (
+  <p className="text-white/40 mb-4">
+    No hay registros para los filtros seleccionados.
+  </p>
+)}
 
       <div className="grid gap-4 md:grid-cols-2">
         {filteredRows.map((r, i) => (
