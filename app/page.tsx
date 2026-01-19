@@ -63,8 +63,8 @@ const buttons = [
     external: false,
   },
 
-  ...Array.from({ length: 17 }).map((_, i) => ({
-    name: `Proyecto ${i + 12}`,
+  ...Array.from({ length: 14 }).map((_, i) => ({
+    name: `Proyecto ${i + 9}`,
     href: null,
     external: false,
   })),
