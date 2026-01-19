@@ -28,9 +28,8 @@ export default function TemasReg() {
       <input
         value={tema}
         onChange={(e) => setTema(e.target.value)}
-        placeholder="Tema (libro, disciplina, autor…)”
-        className="block w-full mb-3 rounded-xl bg-neutral-900 p-3
-          border border-neutral-800 focus:outline-none focus:border-cyan-400/60"
+        placeholder="Tema (libro, disciplina, autor...)"
+        className="block w-full mb-3 rounded-xl bg-neutral-900 p-3 border border-neutral-800 focus:outline-none focus:border-cyan-400/60"
       />
 
       <textarea
