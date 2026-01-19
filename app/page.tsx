@@ -47,8 +47,24 @@ const buttons = [
     href: "/suenos-reg",
     external: false,
   },
+  {
+    name: "Registro de clase",
+    href: "/clase-reg",
+    external: false,
+  },
+  {
+    name: "Pensamientos irruptivos",
+    href: "/irruptivos-reg",
+    external: false,
+  },
+  {
+    name: "Pensamientos temáticos",
+    href: "/temas-reg",
+    external: false,
+  },
+
   ...Array.from({ length: 17 }).map((_, i) => ({
-    name: `Proyecto ${i + 9}`,
+    name: `Proyecto ${i + 12}`,
     href: null,
     external: false,
   })),

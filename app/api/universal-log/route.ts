@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxNa6X3JcAf3szQfDhv0qZyVSAO_nLO07lPPengLiupEvCzCeJh7QyTqO_Gw4L1s0o7/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbw-Q4dGjqrCy-oiA9FFHHfK7sXD7pp9P31JxMM4qSOLeGZXxp5I7_0baxyLkP0rSTjE/exec";
 
 export async function POST(req: Request) {
   const body = await req.json();
