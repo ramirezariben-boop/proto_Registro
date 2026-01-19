@@ -8,6 +8,11 @@ const COLORS = [
 
 const buttons = [
   {
+  name: "Registro unificado",
+  href: "/timeline",
+  external: false,
+  },
+  {
     name: "Registro tiempo",
     href: "https://reg-rec.vercel.app",
     external: true,
@@ -63,8 +68,8 @@ const buttons = [
     external: false,
   },
 
-  ...Array.from({ length: 14 }).map((_, i) => ({
-    name: `Proyecto ${i + 12}`,
+  ...Array.from({ length: 13 }).map((_, i) => ({
+    name: `Proyecto ${i + 13}`,
     href: null,
     external: false,
   })),
