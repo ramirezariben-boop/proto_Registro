@@ -27,7 +27,6 @@ export default function Timeline() {
   const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set());
   const [fromDate, setFromDate] = useState<string | null>(null);
   const [toDate, setToDate] = useState<string | null>(null);
-}
 
   useEffect(() => {
     fetch("/api/read-log?type=all")
